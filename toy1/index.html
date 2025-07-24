@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Today's munchies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+<style>
+body{
+    background-color: #FFF4F6;
+    font-family: 'Pixelify Sans';
+    text-align: center;
+    padding: 50px 20px;
+    margin:0;
+    color:#FF63AF;
+}
+
+h1{
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.reset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: black;
+  }
+
+.reset img{
+    width:30px;
+    height:30px;
+    cursor:pointer;
+}
+
+.middle img{
+    width:500px;
+    height:500px;
+    object-fit: contain;
+    border-radius:26px;
+
+}
+
+#startBtn{
+    width:166px;
+    height:66px;
+}
+
+.popup{
+position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  font-family: 'Pixelify Sans', cursive;
+  font-size: 18px;
+  padding: 20px 30px;
+  border: 2px solid #ff80aa;
+  border-radius: 15px;
+  box-shadow: 0 0 10px #ffc0cb;
+  z-index: 9999;
+  opacity: .9;
+  transition: opacity 0.5s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+</style>
+</head>
+
+
+<!--title-->
+<body>
+ <h1>What do you feel like today?</h1>
+
+<!--Reset btn-->    
+<div class="reset">
+    <img src="reset.png" alt="reset icon" id="resetBtn"/>
+    <span>RESTART</span>
+</div>
+
+<!--img zone-->
+<div class="middle">
+    <img src="defaultBox.png" alt="default" id="boxImg" />
+</div>
+
+<!--start btn-->
+<img src="start.png" alt="START" class="satart-btn" id="startBtn"/>
+
+<!-- Alert box-->
+<div id="popup" class="popup hidden"></div>
+
+<!-- js code-->
+<script>
+//random img
+
+const images = ['random0.jpg','random1.jpg','random2.jpg','random3.jpg','random4.jpg','random5.jpg'];
+
+const boxImg = document.getElementById('boxImg');
+const resetBtn = document.getElementById('resetBtn');
+const startBtn = document.getElementById('startBtn');
+
+// start function
+
+function pckRandomImg(){
+
+const totalImg = images.length
+
+const randomNb = Math.random();
+const randomIndex = Math.floor(randomNb*totalImg)
+const randomImg = images[randomIndex];
+boxImg.src = randomImg
+
+
+//popup
+
+function showPopup(message){
+    const popup = document.getElementById('popup');
+popup.textContent = message;
+popup.classList.remove('hidden')
+
+setTimeout(() => {
+    popup.classList.add('hidden'); // 다시 숨기기
+  }, 1500);
+
+
+}
+//switch
+let foodName = '';
+
+switch(randomImg){
+    case'random0.jpg':
+    foodName="Snack Pack"
+    break;
+    case'random1.jpg':
+    foodName="Creme Brulee"
+    break;
+    case'random2.jpg':
+    foodName="Preztel"
+    break;
+    case'random3.jpg':
+    foodName="Oreo Cheesecake"
+    break;
+    case'random4.jpg':
+    foodName="Wicked Wings"
+    break;
+    case'random5.jpg':
+    foodName="Raspberry Cake"
+    break;
+}
+
+showPopup(`You will have : ${foodName}`);
+
+
+}
+
+startBtn.addEventListener('click',pckRandomImg)
+
+//reset
+
+function gobackTodefault(){
+    boxImg.src= 'defaultBox.png';
+    }
+    resetBtn.addEventListener('click',gobackTodefault)
+
+
+
+</script>
+</body>
+</html>
